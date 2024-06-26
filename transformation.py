@@ -16,7 +16,7 @@ def filterContours(img, contours, hierarchy, stage=1):
 
 
 
-def perspectiveTransform(gray, img, area_thresh = 40, k_size = (5,5), iterations = 3):
+def prespectiveTransform(gray, img, area_thresh = 40, k_size = (5,5), iterations = 3):
 
     '''
     Funtion for creating prespective transformation.
