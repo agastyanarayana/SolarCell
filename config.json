@@ -1,0 +1,10 @@
+{
+
+    "presp_fail_safe_thresh" : 40,
+    "cont_img_low":100,
+    "cont_img_high":255,
+    "cnt_min_area_thresh":100
+    
+
+
+}
