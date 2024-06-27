@@ -21,7 +21,7 @@ except ImportError as e:
 
 from sklearn.cluster import DBSCAN
 
-config_path = os.path.join("/content", 'config.json')
+config_path = os.path.join("/content/SolarCell", 'config.json')
 if not os.path.exists(config_path):
     print(f"Config file not found at {config_path}")
     sys.exit(1)
