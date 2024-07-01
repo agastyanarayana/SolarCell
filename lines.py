@@ -54,15 +54,6 @@ def getLines(c_img, threshold = 10, min_line_length = 20, max_line_gap = 20):
 
 
 def getMargins(img, lines, grid = (12,6), mode = 'v'):
-
-    '''
-    Hough lines generates a lot of lines. We need a way to eliminate noisy lines. This can be done with the
-    help of grid priors. We know the grid size. Hence, we can draw vertical and horizonal lines approximately
-    at their respective positions (with some error margines) . We can call all the lines near by valid and let go of all the lines 
-    that are far from any given vertical or horizontal line.  
-
-    '''
-
         
     h, w, c = img.shape
     if mode == 'v':
