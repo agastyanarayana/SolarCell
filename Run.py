@@ -190,7 +190,7 @@ if __name__ == '__main__':
         basename = os.path.basename(i)
         print(basename)
 
-        crops, v_lines, h_lines = preprocess_ld(im, grid=(6, 24), image_name=basename, 
+        crops, v_lines, h_lines = preprocess_ld(im, grid=(6, 12), image_name=basename, 
                                                 path=output_dir_edge, 
                                                 bypass_prespective_transform=False, 
                                                 debug=True,
