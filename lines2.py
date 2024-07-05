@@ -46,18 +46,18 @@ def getLines(c_img, threshold=10, min_line_length=20, max_line_gap=20):
     return vertical_lines, horizontal_lines
 
 
-def getMargins(img, lines, grid=(12, 6), mode='v'):
+def getMargins(img, lines, grid=(12, 6), mode='v', offset=0):
     h, w, c = img.shape
     if mode == 'v':
         gap = w // grid[1]
         valid_lines = []
-
-        # Adding the first line at the left border of the image
-        valid_lines.append(np.array([[0, 0, 0, h]]))
+        offset = 50
+        # Adding the first line at the left border of the image with offset
+        valid_lines.append(np.array([[offset, 0, offset, h]]))
 
         # Adding subsequent lines uniformly
         for i in range(1, grid[1] + 1):
-            x = i * gap
+            x = i * gap + offset
             valid_lines.append(np.array([[x, 0, x, h]]))
 
         return valid_lines
@@ -66,12 +66,12 @@ def getMargins(img, lines, grid=(12, 6), mode='v'):
         gap = h // grid[0]
         valid_lines = []
 
-        # Adding the first line at the top border of the image
-        valid_lines.append(np.array([[0, 0, w, 0]]))
+        # Adding the first line at the top border of the image with offset
+        valid_lines.append(np.array([[0, offset, w, offset]]))
 
         # Adding subsequent lines uniformly
         for i in range(1, grid[0] + 1):
-            y = i * gap
+            y = i * gap + offset
             valid_lines.append(np.array([[0, y, w, y]]))
 
         return valid_lines
