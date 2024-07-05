@@ -54,7 +54,7 @@ def getMargins(img, lines, grid=(12, 6), mode='v', offset=10):
         gap = w // grid[1]
         valid_lines = []
 
-        if img_name.startswith("L"):
+        if img_name.startswith("R"):
             # Adding the first line at the left border of the image with offset
             valid_lines.append(np.array([[offset, 0, offset, h]]))
         else:
