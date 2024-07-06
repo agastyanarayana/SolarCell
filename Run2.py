@@ -113,7 +113,7 @@ def removeShadow(img):
        result_norm_planes.append(norm_img)
    return cv2.merge(result_planes), cv2.merge(result_norm_planes)
 
-def preprocess_ld(im_s, grid, image_name='abc.jpg', path='./results', write=False, debug=False, bypass_prespective_transform=False, remove_shadow=False):
+def preprocess_ld(im_s, grid, image_name='abc.jpg', path='./results', write=False, debug=False, bypass_prespective_transform=False, remove_shadow=False, half='L'):
     debug_path = os.path.join(path, 'debug')
     crp_path = path
 
@@ -162,7 +162,7 @@ def preprocess_ld(im_s, grid, image_name='abc.jpg', path='./results', write=Fals
         cv2.imwrite(os.path.join(debug_path, image_name), cv2.resize(debug_im2, (0, 0), fx=0.5, fy=0.5))
 
     print(f'Cropping the cells')
-    crops = cropper(h_lines_final, v_lines_final, im_s.copy(), write=write, path=crp_path)
+    crops = cropper(h_lines_final, v_lines_final, im_s.copy(), write=write, path=crp_path, prefix=half)
     print(f'Completed processing. Detected: {len(crops)} cells.')
     return crops, vertical_predicted_lines, horizontal_predicted_lines
 
@@ -189,13 +189,19 @@ if __name__ == '__main__':
                     continue
 
                 basename = os.path.basename(image_file)
-                print(basename)
+                print(f"Processing {basename}")
+
+                half = 'L' if basename[0].lower() == 'l' else 'R'
+
 
                 crops, v_lines, h_lines = preprocess_ld(im, grid=(6, 12), image_name=basename, 
                                                         path=subdir_path, 
                                                         bypass_prespective_transform=False, 
                                                         debug=True,
                                                         remove_shadow=False,
-                                                        write=True)
+                                                        write=True,
+                                                        half=half)
                 if crops is None:
                     print(f"Processing failed for {basename}")
+                else:
+                    print(f"{len(crops)} crops saved for {basename}")
